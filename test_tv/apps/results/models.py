@@ -14,3 +14,8 @@ class TestResult(models.Model):
     @classmethod
     def get_num_failures(cls):
         return cls.objects.filter(status="failure").count()
+
+    def fail(self):
+        self.status = "failure"
+
+    
