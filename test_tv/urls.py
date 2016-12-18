@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from test_tv.apps.results.views import dashboard
+from test_tv.apps.results import views
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^dashboard/', dashboard, name='dashboard')
+    url(r'^dashboard/', views.dashboard, name='dashboard')
 ]

@@ -15,7 +15,17 @@ class TestResult(models.Model):
     def get_num_failures(cls):
         return cls.objects.filter(status="failure").count()
 
+    @classmethod
+    def get_num_errors(cls):
+        return cls.objects.filter(status="error").count()
+
+    @classmethod
+    def get_num_successes(cls):
+        return cls.objects.filter(status="success").count()
+
+    @classmethod
+    def get_num_left(cls):
+        return cls.objects.filter(status="").count()
+
     def fail(self):
         self.status = "failure"
-
-    

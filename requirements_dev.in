@@ -2,3 +2,5 @@
 
 ipdb
 ipython
+jupyter
+pip-tools  # for pip-compile

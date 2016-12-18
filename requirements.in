@@ -2,3 +2,4 @@
 
 asgi_ipc
 channels
+django-extensions  # for shell_plus (inc --notebook)
