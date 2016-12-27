@@ -3,7 +3,7 @@ from django.db import models
 
 class Test(models.Model):
 
-    name = models.CharField(max_length=512, db_index=True)
+    name = models.CharField(max_length=512, db_index=True, unique=True)
 
 
 class TestResult(models.Model):
@@ -13,7 +13,10 @@ class TestResult(models.Model):
     SUCCESS = "success"
 
     test = models.ForeignKey(Test, related_name="results")
-    status = models.CharField(max_length=24, db_index=True)
+    status = models.CharField(max_length=24, db_index=True,
+                              null=True, blank=True)
+    stdout = models.TextField(blank=True)
+    stderr = models.TextField(blank=True)
 
     @classmethod
     def get_num_failures(cls):
@@ -33,3 +36,18 @@ class TestResult(models.Model):
 
     def fail(self):
         self.status = self.FAILURE
+
+    def error(self):
+        self.status = self.ERROR
+
+    def succeed(self):
+        self.status = self.SUCCESS
+
+    def is_failure(self):
+        return self.status == self.FAILURE
+
+    def is_error(self):
+        return self.status == self.ERROR
+
+    def is_success(self):
+        return self.status == self.SUCCESS
